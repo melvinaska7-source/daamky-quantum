@@ -1,0 +1,87 @@
+{
+  "smooth_on": {
+    "sounds": [
+      "daamky:smooth_on"
+    ]
+  },
+  "smooth_off": {
+    "sounds": [
+      "daamky:smooth_off"
+    ]
+  },
+  "celestial_on": {
+    "sounds": [
+      "daamky:celestial_on"
+    ]
+  },
+  "celestial_off": {
+    "sounds": [
+      "daamky:celestial_off"
+    ]
+  },
+  "blop_on": {
+    "sounds": [
+      "daamky:blop_on"
+    ]
+  },
+  "blop_off": {
+    "sounds": [
+      "daamky:blop_off"
+    ]
+  },
+  "settingclose": {
+    "sounds": [
+      "daamky:settingclose"
+    ]
+  },
+  "keyboard_1": {
+    "sounds": [
+      "daamky:keyboard_sounds/1"
+    ]
+  },
+  "keyboard_2": {
+    "sounds": [
+      "daamky:keyboard_sounds/2"
+    ]
+  },
+  "keyboard_3": {
+    "sounds": [
+      "daamky:keyboard_sounds/3"
+    ]
+  },
+  "keyboard_4": {
+    "sounds": [
+      "daamky:keyboard_sounds/4"
+    ]
+  },
+  "keyboard_5": {
+    "sounds": [
+      "daamky:keyboard_sounds/5"
+    ]
+  },
+  "keyboard_6": {
+    "sounds": [
+      "daamky:keyboard_sounds/6"
+    ]
+  },
+  "keyboard_7": {
+    "sounds": [
+      "daamky:keyboard_sounds/7"
+    ]
+  },
+  "gui_open": {
+    "sounds": [
+      "daamky:gui_open"
+    ]
+  },
+  "gui_close": {
+    "sounds": [
+      "daamky:gui_close"
+    ]
+  },
+  "switchcategory": {
+    "sounds": [
+      "daamky:switchcategory"
+    ]
+  }
+}

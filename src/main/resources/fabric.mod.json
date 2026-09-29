@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "daamky",
+  "version": "0.1",
+  "name": "Daamky",
+  "description": "",
+  "authors": [],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "ua.daamky.Daamky"
+    ]
+  },
+  "mixins": [
+    "daamky.mixins.json"
+  ],
+  "accessWidener": "daamky.accesswidener",
+  "depends": {
+    "fabricloader": ">=0.19.1",
+    "fabric-api": "*",
+    "minecraft": "1.21.11"
+  }
+}
