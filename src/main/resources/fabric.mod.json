@@ -2,11 +2,14 @@
   "schemaVersion": 1,
   "id": "daamky",
   "version": "0.1",
-  "name": "Daamky",
-  "description": "",
-  "authors": [],
+  "name": "daamky",
+  "description": "Best cheat client for Minecraft 1.21.11. thank you: Xevix1m, Forestmorn, WBack, SpkrZ",
+  "authors": [
+    "MelviAvas",
+    "forestmorn"
+  ],
   "contact": {},
-  "license": "All-Rights-Reserved",
+  "license": "идинахцй",
   "environment": "client",
   "entrypoints": {
     "client": [

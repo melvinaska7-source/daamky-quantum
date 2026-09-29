@@ -31,9 +31,9 @@ public class Sounds extends Module {
       "Плавный",
       "Целка",
       "Блоп",
-      "Звонкий",
-      "Глухой",
-      "Форестморн <3"
+      "module_5",
+      "module_6",
+      "module_7"
    );
    private final NumberSetting f2 = new NumberSetting("Громкость", 100.0, 0.0, 100.0, 1.0);
 

@@ -34,7 +34,7 @@ jobs:
       - name: Upload Mod Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: mod-jar
+          name: daamky-quantum
           # Исключаем dev, sources и javadoc, оставляем только сам мод
           path: |
             build/libs/*.jar

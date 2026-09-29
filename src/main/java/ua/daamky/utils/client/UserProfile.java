@@ -6,10 +6,10 @@ import java.nio.file.Paths;
 public final class UserProfile {
    private static final Path f1;
    private static long f2;
-    private static String f3 = "Made by Klodovka and Forestmorn";
-   private static String f4 = "Made by Klodovka and Forestmorn";
-   private static String f5 = "tg: t.me/daamkydlc ";
-   private static String f6 = "DAAMKY QUANTUM";
+    private static String f3 = "daamky quantum";
+   private static String f4 = "daamky quantum";
+   private static String f5 = "daamky quantum";
+   private static String f6 = "by melviavas";
 
    private UserProfile() {
    }
