@@ -12,6 +12,7 @@ import ua.daamky.utils.EasingUtil;
 import ua.daamky.utils.ScissorUtil;
 import ua.daamky.utils.client.UserProfile;
 import ua.daamky.utils.render.Render2DUtil;
+import ua.daamky.utils.render.shaders.HudBlurShader;
 import ua.daamky.utils.render.TextureCache;
 import ua.daamky.utils.render.fonts.FontRenderUtil;
 import java.awt.Color;
@@ -207,8 +208,26 @@ public class ClickGuiScreen extends Screen {
    }
 
    public void render(DrawContext context, int mouseX, int mouseY, float deltaTicks) {
-      float var5 = Render2DUtil.m3((float)mouseX);
-      float var6 = Render2DUtil.m151((float)mouseY);
+      HudBlurShader.f8 = 120L;
+      try {
+         this.daamky$renderInner(context, mouseX, mouseY, deltaTicks);
+      } finally {
+         HudBlurShader.f8 = 0L;
+      }
+   }
+
+   private void daamky$renderInner(DrawContext context, int mouseX, int mouseY, float deltaTicks) {
+      // дробные координаты мыши: целые GUI-пиксели давали "ступеньки" в hover-анимациях
+      float var5x = (float)mouseX;
+      float var6x = (float)mouseY;
+      try {
+         var5x = (float)(this.client.mouse.getX() * (double)this.client.getWindow().getScaledWidth() / (double)Math.max(1, this.client.getWindow().getWidth()));
+         var6x = (float)(this.client.mouse.getY() * (double)this.client.getWindow().getScaledHeight() / (double)Math.max(1, this.client.getWindow().getHeight()));
+      } catch (Throwable ignored) {
+      }
+
+      float var5 = Render2DUtil.m3(var5x);
+      float var6 = Render2DUtil.m151(var6x);
       this.f55 = var5;
       this.f56 = var6;
       this.m286();
@@ -609,12 +628,12 @@ public class ClickGuiScreen extends Screen {
             float var9 = this.f46.getOrDefault(var7, var8);
             var9 = Math.clamp(var9, 0.0F, this.m1351(var7));
             this.f46.put(var7, var9);
-            this.f40.put(var7, this.m1139(var8, var9, 0.025F, var3));
+            this.f40.put(var7, this.m1139(var8, var9, 0.016F, var3));
          }
 
          float var10 = Math.max(0.0F, this.m1121(this.f41) - this.m1017());
          this.f43 = Math.clamp(this.f43, 0.0F, var10);
-         this.f42 = this.m1139(this.f42, this.f43, 0.025F, var3);
+         this.f42 = this.m1139(this.f42, this.f43, 0.016F, var3);
 
          for (ClickGuiScreen$2 var13 : this.f94) {
             var13.f2 = this.m1139(var13.f2, 1.0F, 0.03F, var3);
@@ -1063,7 +1082,7 @@ public class ClickGuiScreen extends Screen {
                   this.f76 = var23;
                }
 
-               boolean var27 = !f103 || var26 + var23.m272() * var8 >= var11 && var26 <= var11 + var13;
+               boolean var27 = var26 + var23.m272() * var8 >= var11 - 4.0F && var26 <= var11 + var13 + 4.0F;
                if (var27) {
                   var23.m1346(var1, var25, var26, var14, var6, var7, var8, var21);
                }

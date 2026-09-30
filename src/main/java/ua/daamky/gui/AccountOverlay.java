@@ -205,6 +205,29 @@ public class AccountOverlay {
       }
    }
 
+   // Прячет кнопки, которые добавляют другие моды (ModMenu, IAS и т.д.) уже после init(): у них нет ни одной из наших меток.
+   public static void m1400(TitleScreen var0) {
+      boolean var1 = false;
+      for (Element var2 : var0.children()) {
+         if (var2 instanceof ClickableWidget var3 && var3.visible) {
+            String var4 = m1389(var3);
+            if ("P".equals(var4) || "N".equals(var4)) {
+               var1 = true;
+               break;
+            }
+         }
+      }
+
+      if (var1) {
+         for (Element var5 : var0.children()) {
+            if (var5 instanceof ClickableWidget var6 && var6.visible && m1389(var6) == null) {
+               var6.visible = false;
+               var6.active = false;
+            }
+         }
+      }
+   }
+
    private static String m1389(ClickableWidget var0) {
       String var1 = var0.getMessage().getString().replaceAll("§.", "").toLowerCase();
       if (var1.contains("одиноч")

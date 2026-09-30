@@ -31,6 +31,9 @@ public class HudBlurShader {
    private static final int f1 = 256;
    private static RenderPipeline f2;
    private static GpuBuffer f3;
+   // максимальный возраст копии кадра в мс (0 = копировать каждый вызов, как раньше)
+   public static volatile long f8 = 0L;
+   private static long f9 = 0L;
    private static GpuTexture f4;
    private static GpuTextureView f5;
    private static int f6;
@@ -102,7 +105,12 @@ public class HudBlurShader {
                var24.putFloat(var12).putFloat(0.0F).putFloat(0.0F).putFloat(0.0F);
                var24.flip();
                CommandEncoder var25 = RenderSystem.getDevice().createCommandEncoder();
-               var25.copyTextureToTexture(var14.getColorAttachment(), f4, 0, 0, 0, 0, 0, var15, var16);
+               long var40 = System.nanoTime();
+               if (f8 <= 0L || f9 == 0L || (var40 - f9) > f8 * 1000000L) {
+                  var25.copyTextureToTexture(var14.getColorAttachment(), f4, 0, 0, 0, 0, 0, var15, var16);
+                  f9 = var40;
+               }
+
                var25.writeToBuffer(f3.slice(), var24);
                MemoryUtil.memFree(var24);
                GpuSampler var26 = RenderSystem.getSamplerCache().get(FilterMode.LINEAR);
@@ -156,6 +164,7 @@ public class HudBlurShader {
          f5 = RenderSystem.getDevice().createTextureView(f4);
          f6 = var0;
          f7 = var1;
+         f9 = 0L;
       }
    }
 

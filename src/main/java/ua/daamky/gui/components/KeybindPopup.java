@@ -80,6 +80,23 @@ public class KeybindPopup {
       this.m1346(var1, var2, var3, var4, var5, var6, 1.0F, 1.0F);
    }
 
+   private String daamky$wrapKey;
+   private float daamky$wrapW = -1.0F;
+   private float daamky$wrapS = -1.0F;
+   private List<String> daamky$wrapVal = List.of();
+
+   // перенос строк описания считается только когда меняется текст/ширина/размер, а не каждый кадр
+   private List<String> daamky$wrapCached(String var1, float var2, float var3) {
+      if (this.daamky$wrapKey == null || !this.daamky$wrapKey.equals(var1) || this.daamky$wrapW != var2 || this.daamky$wrapS != var3) {
+         this.daamky$wrapVal = this.m1401(var1, var2, var3, 2);
+         this.daamky$wrapKey = var1;
+         this.daamky$wrapW = var2;
+         this.daamky$wrapS = var3;
+      }
+
+      return this.daamky$wrapVal;
+   }
+
    public void m1346(DrawContext var1, float var2, float var3, float var4, float var5, float var6, float var7, float var8) {
       this.f14 = var2;
       this.f15 = var3;
@@ -87,7 +104,7 @@ public class KeybindPopup {
       this.f17 = var7;
       String var9 = this.f12.getDescription();
       float var10 = 6.8F * var7;
-      List<String> var11 = var9 != null && !var9.isEmpty() ? this.m1401(var9, var4 - 16.0F * var7, var10, 2) : List.of();
+      List<String> var11 = var9 != null && !var9.isEmpty() ? this.daamky$wrapCached(var9, var4 - 16.0F * var7, var10) : List.of();
       this.f18 = var11.isEmpty() ? 22.0F : 19.0F + (float)var11.size() * 7.0F + 7.0F;
       float var12 = this.f18 * var7;
       this.f33 = this.m35(var5, var6, var2, var3, var4, var12);

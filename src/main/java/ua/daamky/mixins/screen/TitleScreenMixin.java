@@ -48,6 +48,7 @@ public abstract class TitleScreenMixin extends Screen {
    )
    private void daamky$captureContext(DrawContext var1, int var2, int var3, float var4, CallbackInfo var5) {
       AccountOverlay.m1386((TitleScreen)(Object)this);
+      AccountOverlay.m1400((TitleScreen)(Object)this);
       AccountOverlay.m1063(var1);
    }
 

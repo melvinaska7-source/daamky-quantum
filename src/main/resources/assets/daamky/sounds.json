@@ -83,5 +83,45 @@
     "sounds": [
       "daamky:switchcategory"
     ]
+  },
+  "default_on": {
+    "sounds": [
+      "daamky:default_on"
+    ]
+  },
+  "default_off": {
+    "sounds": [
+      "daamky:default_off"
+    ]
+  },
+  "bright_on": {
+    "sounds": [
+      "daamky:bright_on"
+    ]
+  },
+  "bright_off": {
+    "sounds": [
+      "daamky:bright_off"
+    ]
+  },
+  "muffled_on": {
+    "sounds": [
+      "daamky:muffled_on"
+    ]
+  },
+  "muffled_off": {
+    "sounds": [
+      "daamky:muffled_off"
+    ]
+  },
+  "forestmorn_on": {
+    "sounds": [
+      "daamky:forestmorn_on"
+    ]
+  },
+  "forestmorn_off": {
+    "sounds": [
+      "daamky:forestmorn_off"
+    ]
   }
 }

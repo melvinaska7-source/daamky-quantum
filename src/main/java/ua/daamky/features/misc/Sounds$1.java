@@ -4,17 +4,16 @@ import java.util.Locale;
 import net.minecraft.util.Identifier;
 
 public enum Sounds$1 {
-   f1("Дефолт", "default"),
+   f1("Обычный", "default"),
    f2("Плавный", "smooth"),
    f3("Целка", "celestial"),
    f4("Блоп", "blop"),
-   f5("Module 5", "module5", 5),
-   f6("Module 6", "module6", 6),
-   f7("Module 7", "module7", 7);
+   f5("Звонкий", "bright"),
+   f6("Глухой", "muffled"),
+   f7("forestmorn", "forestmorn");
 
    public final String f8;
    public final String f9;
-   public final int f10;
 
    public static Sounds$1[] m888() {
       return values();
@@ -25,34 +24,37 @@ public enum Sounds$1 {
    }
 
    Sounds$1(String var3, String var4) {
-      this(var3, var4, -1);
-   }
-
-   Sounds$1(String var3, String var4, int var5) {
       this.f8 = var3;
       this.f9 = var4;
-      this.f10 = var5;
    }
 
    public Identifier m890(boolean var1) {
-      return Identifier.of(
-         "daamky", this.f9 + (var1 ? "_on" : "_off")
-      );
-   }
-
-   public boolean m81() {
-      return this.f10 > 0;
-   }
-
-   public String m891(boolean var1) {
-      return "assets/daamky/sounds/module_"
-         + (var1 ? "enable" : "disable")
-         + "_"
-         + this.f10
-         + ".wav";
+      return Identifier.of("daamky", this.f9 + (var1 ? "_on" : "_off"));
    }
 
    public static Sounds$1 m892(String var0) {
+      if (var0 == null) {
+         return f1;
+      }
+
+      // старые названия из сохранённых конфигов
+      switch (var0.toLowerCase(Locale.ROOT)) {
+         case "дефолт" -> {
+            return f1;
+         }
+         case "module 5", "module5" -> {
+            return f5;
+         }
+         case "module 6", "module6" -> {
+            return f6;
+         }
+         case "module 7", "module7" -> {
+            return f7;
+         }
+         default -> {
+         }
+      }
+
       for (Sounds$1 var4 : m888()) {
          if (var4.f8.equalsIgnoreCase(var0) || var4.f9.equals(var0.toLowerCase(Locale.ROOT))) {
             return var4;
