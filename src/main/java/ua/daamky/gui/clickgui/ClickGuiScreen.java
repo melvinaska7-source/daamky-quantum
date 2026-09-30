@@ -316,19 +316,11 @@ public class ClickGuiScreen extends Screen {
                )
             );
          MinecraftClient var1 = MinecraftClient.getInstance();
-         f99 = this;
+         f98 = 0L;
+         f99 = null;
          f100 = null;
          f101 = null;
          f102 = null;
-         if (var1.player != null) {
-            Vec3d var2 = var1.player.getRotationVec(1.0F);
-            f100 = var1.player.getEyePos().add(var2.multiply(2.6));
-            f101 = var2.multiply(-1.0);
-            Camera var3 = var1.gameRenderer.getCamera();
-            f102 = var3 != null ? new Quaternionf(var3.getRotation()) : null;
-         }
-
-         f98 = f100 != null && f102 != null ? System.currentTimeMillis() : 0L;
          var1.setScreen(null);
       }
    }

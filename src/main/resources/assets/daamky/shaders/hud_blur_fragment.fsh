@@ -38,7 +38,7 @@ void main() {
     vec2 multiplier = blurRadius / vec2(textureSize(Sampler0, 0));
 
     vec3 average = texture(Sampler0, texCoord).rgb;
-    float samples = 128.0;
+    float samples = 32.0;
     float noise = fract(sin(dot(pixelCoord, vec2(12.9898, 78.233))) * 43758.5453);
     float startTheta = noise * DPI;
     

@@ -5,6 +5,7 @@ import java.util.List;
 import ua.daamky.gui.AccountOverlay;
 import ua.daamky.gui.TitleBackground;
 import ua.daamky.utils.render.Render2D;
+import ua.daamky.utils.render.Render2DUtil;
 import java.util.ArrayList;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
@@ -71,15 +72,23 @@ public abstract class TitleScreenMixin extends Screen {
          }
       }
 
-      int var19 = var2.width / 2;
-      byte var20 = 108;
-      byte var21 = 28;
-      byte var22 = 8;
-      int var23 = var20 * 2 + var22;
-      int var9 = var19 - var23 / 2;
-      int var10 = var2.height / 2 - 52;
+      // Layout is computed in "virtual" units (half a physical pixel), the same space Render2DUtil draws in,
+      // then converted to GUI units, so it looks identical at every GUI scale (1..5, auto).
+      float var30 = Render2DUtil.m192();
+      float var31 = (float)var2.width * var30;
+      float var32 = (float)var2.height * var30;
+      float var33 = Math.clamp(Math.min(var32 / 300.0F, var31 / 250.0F), 0.6F, 1.3F);
+      float var34 = 212.0F * var33;
+      float var35 = 30.0F * var33;
+      float var36 = 8.0F * var33;
+      float var37 = var35 * 4.0F + var36 * 3.0F;
+      float var38 = 100.0F * var33;
+      float var39 = (var32 - (var38 + var37)) / 2.0F;
+      float var40 = var39 + var38;
+      float var41 = var31 / 2.0F - var34 / 2.0F;
+      float var42 = (var34 - var36) / 2.0F;
       ButtonWidget var11 = ButtonWidget.builder(Text.literal("Открыть альтменеджер"), var1x -> MinecraftClient.getInstance().setScreen(new Render2D(var2)))
-         .dimensions(0, 0, var20, var21)
+         .dimensions(0, 0, 100, 20)
          .build();
       this.addDrawableChild(var11);
       ButtonWidget var12 = null;
@@ -104,21 +113,15 @@ public abstract class TitleScreenMixin extends Screen {
       }
 
       if (var12 != null && var13 != null) {
-         if (var13 != null) {
-            var13.setDimensionsAndPosition(var20, var21, var9, var10);
-         }
-
-         if (var12 != null) {
-            var12.setDimensionsAndPosition(var20, var21, var9 + var20 + var22, var10);
-         }
-
+         this.daamky$place(var12, var41, var40, var34, var35, var30);
+         this.daamky$place(var13, var41, var40 + var35 + var36, var34, var35, var30);
          if (var14 != null) {
-            var14.setDimensionsAndPosition(var20, var21, var9, var10 + var21 + var22);
+            this.daamky$place(var14, var41, var40 + 2.0F * (var35 + var36), var42, var35, var30);
          }
 
-         var11.setDimensionsAndPosition(var20, var21, var9 + var20 + var22, var10 + var21 + var22);
+         this.daamky$place(var11, var41 + var42 + var36, var40 + 2.0F * (var35 + var36), var42, var35, var30);
          if (var15 != null) {
-            var15.setDimensionsAndPosition(var23, 25, var9, var10 + 2 * (var21 + var22));
+            this.daamky$place(var15, var41, var40 + 3.0F * (var35 + var36), var34, var35, var30);
          }
       } else {
          for (ButtonWidget var25 : var3) {
@@ -129,6 +132,12 @@ public abstract class TitleScreenMixin extends Screen {
          var11.visible = false;
          var11.active = false;
       }
+   }
+
+   private void daamky$place(ButtonWidget var1, float var2, float var3, float var4, float var5, float var6) {
+      int var7 = Math.max(20, Math.round(var4 / var6));
+      int var8 = Math.max(12, Math.round(var5 / var6));
+      var1.setDimensionsAndPosition(var7, var8, Math.round(var2 / var6), Math.round(var3 / var6));
    }
 
    @Redirect(

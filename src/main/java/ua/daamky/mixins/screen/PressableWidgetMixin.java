@@ -29,12 +29,13 @@ public class PressableWidgetMixin {
    }
 
    private void daamky$drawGlassButton(ClickableWidget var1, float var2) {
-      float var3 = (float)var1.getX();
-      float var4 = (float)var1.getY();
-      float var5 = (float)var1.getWidth();
-      float var6 = (float)var1.getHeight();
-      boolean var7 = var1.isSelected();
-      float var8 = 4.0F;
+      float var10 = Render2DUtil.m192();
+      float var3 = (float)var1.getX() * var10;
+      float var4 = (float)var1.getY() * var10;
+      float var5 = (float)var1.getWidth() * var10;
+      float var6 = (float)var1.getHeight() * var10;
+      boolean var7 = var1.isHovered();
+      float var8 = 4.0F * var10;
       Color var9 = var7 ? new Color(255, 255, 255, Math.round(130.0F * var2)) : new Color(210, 218, 225, Math.round(92.0F * var2));
       Render2DUtil.m217(var3 + 0.5F, var4 + 1.2F, var5 - 1.0F, var6 - 0.4F, var8, 9.0F, 0.28F * var2, 2.2F, new Color(0, 0, 0, 170));
       Render2DUtil.m195(var3, var4, var5, var6, var8, new Color(18, 22, 28, Math.round((var7 ? 128.0F : 96.0F) * var2)));
