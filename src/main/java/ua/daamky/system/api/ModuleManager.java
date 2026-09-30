@@ -95,6 +95,7 @@ import ua.daamky.features.render.NoRender;
 import ua.daamky.features.render.Particles;
 import ua.daamky.features.render.Predictions;
 import ua.daamky.features.render.Radar;
+import ua.daamky.features.render.Waypoints;
 import ua.daamky.features.render.SeeInvisibles;
 import ua.daamky.features.render.ShulkerPreview;
 import ua.daamky.features.render.SkyShader;
@@ -170,6 +171,7 @@ public class ModuleManager {
          new NoRender(),
          new Arrows(),
          new Radar(),
+         new Waypoints(),
          new HitWave(),
          new FullBright(),
          new NameTags(),

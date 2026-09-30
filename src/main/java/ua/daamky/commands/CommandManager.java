@@ -1,5 +1,6 @@
 package ua.daamky.commands;
 
+import ua.daamky.features.render.Waypoints;
 import ua.daamky.utils.FriendCommand;
 import ua.daamky.utils.ParseCommand;
 import ua.daamky.utils.BotCommand;
@@ -16,19 +17,19 @@ public final class CommandManager {
    }
 
    public static boolean m20(String var0) {
-      return FriendCommand.m20(var0) || ConfigCommand.m20(var0) || BotCommand.m20(var0) || m374(var0);
+      return FriendCommand.m20(var0) || ConfigCommand.m20(var0) || BotCommand.m20(var0) || Waypoints.m20(var0) || m374(var0);
    }
 
    public static List<String> m428(String var0) {
       String var1 = var0.stripLeading().toLowerCase(Locale.ROOT);
       if (".".equals(var1)) {
-         return Stream.of(".friend", ".cfg", ".bot")
+         return Stream.of(".friend", ".cfg", ".bot", ".wp", ".bind")
             .sorted()
             .toList();
       } else {
          return var1.startsWith(".p") && ".parse".startsWith(var1)
             ? List.of(".parse")
-            : Stream.of(FriendCommand.m428(var0).stream(), ConfigCommand.m428(var0).stream(), BotCommand.m428(var0).stream(), Stream.empty())
+            : Stream.of(FriendCommand.m428(var0).stream(), ConfigCommand.m428(var0).stream(), BotCommand.m428(var0).stream(), Waypoints.m428(var0).stream())
                .flatMap(var0x -> (Stream<String>)var0x)
                .sorted(Comparator.naturalOrder())
                .toList();
@@ -53,13 +54,13 @@ public final class CommandManager {
          if (".friend".equals(var2)
             || ".cfg".equals(var2)
             || ".bot".equals(var2)
+            || ".wp".equals(var2)
+            || ".bind".equals(var2)
             || ".neuro".equals(var2)
             || ".нейро".equals(var2)) {
             return var2 + " ";
          } else {
-            return var2.endsWith("<nick>")
-               ? var2.substring(0, var2.length() - "<nick>".length())
-               : var2;
+            return var2.replaceAll("<[a-z]+>$", "");
          }
       }
    }
