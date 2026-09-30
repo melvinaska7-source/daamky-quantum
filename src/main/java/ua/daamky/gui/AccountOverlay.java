@@ -219,10 +219,51 @@ public class AccountOverlay {
       }
 
       if (var1) {
+         ClickableWidget var7 = null;
+         ClickableWidget var8 = null;
+         ClickableWidget var9 = null;
+         ClickableWidget var10 = null;
+         ClickableWidget var11 = null;
          for (Element var5 : var0.children()) {
-            if (var5 instanceof ClickableWidget var6 && var6.visible && m1389(var6) == null) {
-               var6.visible = false;
-               var6.active = false;
+            if (var5 instanceof ClickableWidget var6 && var6.visible) {
+               String var12 = m1389(var6);
+               if (var12 == null) {
+                  var6.visible = false;
+                  var6.active = false;
+               } else if ("P".equals(var12)) {
+                  var7 = var6;
+               } else if ("N".equals(var12)) {
+                  var8 = var6;
+               } else if ("O".equals(var12)) {
+                  var9 = var6;
+               } else if ("U".equals(var12)) {
+                  var10 = var6;
+               } else if ("Q".equals(var12)) {
+                  var11 = var6;
+               }
+            }
+         }
+
+         // Ряды идут вплотную друг к другу (без "воздуха" на месте скрытых кнопок) и весь блок центрируется по высоте.
+         if (var7 != null && var8 != null) {
+            int var13 = var7.getHeight();
+            int var14 = var13 + Math.max(2, Math.round((float)var13 * 0.267F));
+            int var15 = 3 + (var11 != null ? 1 : 0);
+            int var16 = Math.round((float)var13 * 100.0F / 30.0F);
+            int var17 = var16 + (var15 - 1) * var14 + var13;
+            int var18 = (var0.height - var17) / 2 + var16;
+            var7.setY(var18);
+            var8.setY(var18 + var14);
+            if (var9 != null) {
+               var9.setY(var18 + 2 * var14);
+            }
+
+            if (var10 != null) {
+               var10.setY(var18 + 2 * var14);
+            }
+
+            if (var11 != null) {
+               var11.setY(var18 + 3 * var14);
             }
          }
       }

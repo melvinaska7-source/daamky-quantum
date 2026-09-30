@@ -236,12 +236,13 @@ public class ClickGuiScreen extends Screen {
       if (this.f60 && var7 <= 0.01F) {
          this.client.setScreen(null);
       } else {
-         float var8 = EasingUtil.m151(var7);
-         float var9 = 0.9F + var8 * 0.1F;
+         float var8 = this.f60 ? var7 * var7 : EasingUtil.m151(var7);
+         float var9 = 0.88F + var8 * 0.12F;
+         float var15x = (1.0F - var8) * 16.0F;
          float var11 = ((float)Render2DUtil.m113() - 430.0F) / 2.0F;
-         float var12 = ((float)Render2DUtil.m189() - 290.0F) / 2.0F;
+         float var12 = ((float)Render2DUtil.m189() - 290.0F) / 2.0F + var15x;
          float var13 = (float)Render2DUtil.m113() / 2.0F;
-         float var14 = (float)Render2DUtil.m189() / 2.0F;
+         float var14 = (float)Render2DUtil.m189() / 2.0F + var15x;
          this.m1326(context, var11, var12, var5, var6, var13, var14, var9, var8);
          super.render(context, mouseX, mouseY, deltaTicks);
       }
@@ -325,8 +326,9 @@ public class ClickGuiScreen extends Screen {
    public void close() {
       if (!this.f60) {
          ThemeManager.m29();
+         float var2c = this.m272();
          this.f60 = true;
-         this.f59 = System.currentTimeMillis();
+         this.f59 = System.currentTimeMillis() - (long)((1.0F - var2c) * 170.0F);
          MinecraftClient.getInstance()
             .getSoundManager()
             .play(
@@ -334,18 +336,16 @@ public class ClickGuiScreen extends Screen {
                   SoundEvent.of(Identifier.of("daamky", "gui_close")), 1.0F, 1.0F
                )
             );
-         MinecraftClient var1 = MinecraftClient.getInstance();
          f98 = 0L;
          f99 = null;
          f100 = null;
          f101 = null;
          f102 = null;
-         var1.setScreen(null);
       }
    }
 
    public boolean mouseClicked(Click click, boolean doubled) {
-      if (!this.f60 && !(this.m272() < 0.95F)) {
+      if (!this.f60 && !(this.m272() < 0.6F)) {
          float var3 = Render2DUtil.m3((float)click.x());
          float var4 = Render2DUtil.m151((float)click.y());
          int var5 = click.button();
@@ -577,7 +577,7 @@ public class ClickGuiScreen extends Screen {
    }
 
    public boolean mouseScrolled(double mouseX, double mouseY, double horizontalAmount, double verticalAmount) {
-      if (!this.f60 && !(this.m272() < 0.95F)) {
+      if (!this.f60 && !(this.m272() < 0.6F)) {
          float var9 = Render2DUtil.m3((float)mouseX);
          float var10 = Render2DUtil.m151((float)mouseY);
          float var11 = ((float)Render2DUtil.m113() - 430.0F) / 2.0F;
@@ -604,7 +604,7 @@ public class ClickGuiScreen extends Screen {
    }
 
    private float m272() {
-      float var1 = (float)(System.currentTimeMillis() - this.f59) / 180.0F;
+      float var1 = (float)(System.currentTimeMillis() - this.f59) / (this.f60 ? 170.0F : 300.0F);
       var1 = Math.clamp(var1, 0.0F, 1.0F);
       return this.f60 ? 1.0F - var1 : var1;
    }
@@ -621,7 +621,7 @@ public class ClickGuiScreen extends Screen {
          this.f78 = this.m1363();
          this.f70 = this.m1139(this.f70, this.m646() ? 1.0F : 0.0F, 0.02F, var3);
          this.f69 = this.m1139(this.f69, 0.0F, 0.018F, var3);
-         this.f51 = this.m1139(this.f51, 1.0F, 0.05F, var3);
+         this.f51 = Math.min(1.0F, this.f51 + var3 / 340.0F);
 
          for (Category var7 : f1) {
             float var8 = this.f40.getOrDefault(var7, 0.0F);
@@ -895,7 +895,7 @@ public class ClickGuiScreen extends Screen {
 
       boolean var12 = this.f48 && this.f50 == ClickGuiScreen$3.f1;
       if (this.f57 && !var12) {
-         this.f54 = this.m1139(this.f54, var11, 0.028F, this.f53);
+         this.f54 = this.m1139(this.f54, var11, 0.02F, this.f53);
       } else {
          this.f54 = var11;
          this.f57 = true;
@@ -1067,24 +1067,25 @@ public class ClickGuiScreen extends Screen {
             );
             ScissorUtil.m29();
          } else {
-            float var17 = EasingUtil.m151(this.f51);
-            float var18 = (1.0F - var17) * 10.0F * var8;
-            float var19 = var11 - var16 + var18;
-            float var20 = var11 - var16 + var18;
-            float var21 = var9 * var9 * var17;
+            float var19 = var11 - var16;
+            float var20 = var11 - var16;
 
             for (int var22 = 0; var22 < var15.size(); var22++) {
                KeybindPopup var23 = (KeybindPopup)var15.get(var22);
                boolean var24 = var22 % 2 == 0;
                float var25 = var24 ? var10 : var10 + var14 + 5.0F * var8;
                float var26 = var24 ? var19 : var20;
-               if (this.f51 > 0.6F && this.m35(var6, var7, var25, var26, var14, 38.0F * var8) && this.m35(var6, var7, var10, var11, var12, var13)) {
+               float var30 = Math.clamp((this.f51 * 560.0F - (float)Math.min(var22, 8) * 26.0F) / 340.0F, 0.0F, 1.0F);
+               float var31 = EasingUtil.m151(var30);
+               float var32 = (1.0F - var31) * 14.0F * var8;
+               float var21 = var9 * var9 * var31;
+               if (var31 > 0.6F && this.m35(var6, var7, var25, var26, var14, 38.0F * var8) && this.m35(var6, var7, var10, var11, var12, var13)) {
                   this.f76 = var23;
                }
 
                boolean var27 = var26 + var23.m272() * var8 >= var11 - 4.0F && var26 <= var11 + var13 + 4.0F;
-               if (var27) {
-                  var23.m1346(var1, var25, var26, var14, var6, var7, var8, var21);
+               if (var27 && var21 > 0.001F) {
+                  var23.m1346(var1, var25, var26 + var32, var14, var6, var7, var8, var21);
                }
 
                float var28 = (var23.m272() + 5.0F) * var8;
