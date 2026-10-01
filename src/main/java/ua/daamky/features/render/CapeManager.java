@@ -20,6 +20,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Map.Entry;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.texture.NativeImage;
 import net.minecraft.client.texture.NativeImageBackedTexture;
@@ -27,7 +28,8 @@ import net.minecraft.util.Identifier;
 
 public final class CapeManager {
    private static final int f1 = 256;
-   private static final List<CapeManager$1> f2 = List.of();
+   private static List<CapeManager$1> f2 = m483();
+   private static boolean f8;
    private static final Map<Integer, JsonObject> f3 = new HashMap<>();
    private static final Map<Integer, CosmeticModelItem> f4 = new HashMap<>();
    private static final Map<Integer, Identifier> f5 = new HashMap<>();
@@ -37,10 +39,27 @@ public final class CapeManager {
    private CapeManager() {
    }
 
+   // Ленивая инициализация: путь к файлу выбора и загрузка сохранённой косметики (один раз).
+   private static void init() {
+      if (!f8) {
+         f8 = true;
+
+         try {
+            f7 = FabricLoader.getInstance().getGameDir().resolve("Daamky").resolve("cosmetics.properties");
+         } catch (Throwable var1) {
+            f7 = null;
+         }
+
+         m299();
+      }
+   }
+
    public static void m63() {
+      init();
    }
 
    public static int m189() {
+      init();
       return f2.size();
    }
 
@@ -72,14 +91,17 @@ public final class CapeManager {
    }
 
    public static boolean m13(int var0) {
+      init();
       return f6.containsValue(var0);
    }
 
    public static List<Integer> m24() {
+      init();
       return List.copyOf(f6.values());
    }
 
    public static void m15(int var0) {
+      init();
       CapeManager$1 var1 = m487(var0);
       Integer var2 = f6.get(var1.m18());
       if (var2 != null && var2 == var0) {
@@ -94,8 +116,23 @@ public final class CapeManager {
       m308();
    }
 
+   // var0 - индекс в списке косметики; модель собирается один раз и кэшируется по id.
    public static CosmeticModelItem m478(int var0) {
-      return null;
+      init();
+      if (var0 >= 0 && var0 < f2.size()) {
+         int var1 = f2.get(var0).m113();
+         CosmeticModelItem var2 = f4.get(var1);
+         if (var2 == null || var2.m560() == null) {
+            var2 = m480(var1);
+            if (var2 != null && var2.m560() != null) {
+               f4.put(var1, var2);
+            }
+         }
+
+         return var2;
+      } else {
+         return null;
+      }
    }
 
    public static Identifier m479() {

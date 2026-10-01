@@ -232,6 +232,26 @@ public class Waypoints extends Module {
 
    // ------------------------------------------------------------------ команды
 
+   /** Для Compass: метки текущего сервера и измерения как {имя, x, z, смерть?}. */
+   public static List<Object[]> compassPoints() {
+      List<Object[]> out = new ArrayList<>();
+      MinecraftClient mc = MinecraftClient.getInstance();
+      if (mc.world == null) {
+         return out;
+      }
+
+      ensureLoaded();
+      String server = serverKey(mc);
+      String dim = dimKey(mc);
+      for (Point p : POINTS) {
+         if (server.equals(p.server) && dim.equals(p.dim)) {
+            out.add(new Object[]{p.name, p.x, p.z, p.death});
+         }
+      }
+
+      return out;
+   }
+
    public static boolean m20(String raw) {
       String line = raw.trim();
       String low = line.toLowerCase(Locale.ROOT);

@@ -4,6 +4,7 @@ import ua.daamky.features.render.ChinaHat;
 import ua.daamky.features.render.EntityESP;
 import ua.daamky.features.render.SeeInvisibles;
 import ua.daamky.system.api.ModuleManager;
+import ua.daamky.utils.CustomFeatureRenderer;
 import ua.daamky.utils.RenderQueueBridge;
 import java.util.List;
 import net.minecraft.client.MinecraftClient;
@@ -17,6 +18,7 @@ import net.minecraft.client.render.entity.LivingEntityRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRenderer;
 import net.minecraft.client.render.entity.model.BipedEntityModel;
 import net.minecraft.client.render.entity.model.EntityModel;
+import net.minecraft.client.render.entity.model.PlayerEntityModel;
 import net.minecraft.client.render.entity.state.LivingEntityRenderState;
 import net.minecraft.client.render.entity.state.PlayerEntityRenderState;
 import net.minecraft.client.render.state.CameraRenderState;
@@ -162,6 +164,22 @@ public abstract class LivingEntityRendererMixin<S extends LivingEntityRenderStat
             && !var8.options.getPerspective().isFirstPerson()
             && this.model instanceof BipedEntityModel var9) {
             var6.m1022(var2, var9);
+         }
+      }
+   }
+
+   @Inject(
+      method = {"render(Lnet/minecraft/client/render/entity/state/LivingEntityRenderState;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/command/OrderedRenderCommandQueue;Lnet/minecraft/client/render/state/CameraRenderState;)V"},
+      at = {@At(
+         value = "INVOKE",
+         target = "Lnet/minecraft/client/util/math/MatrixStack;pop()V"
+      )}
+   )
+   private void daamky$renderCosmetics(S var1, MatrixStack var2, OrderedRenderCommandQueue var3, CameraRenderState var4, CallbackInfo var5) {
+      if (var1 instanceof PlayerEntityRenderState var6 && this.model instanceof PlayerEntityModel var7) {
+         MinecraftClient var8 = MinecraftClient.getInstance();
+         if (var8.player != null && var6.id == var8.player.getId() && !var8.options.getPerspective().isFirstPerson()) {
+            CustomFeatureRenderer.m500(var2, null, var7, var6, var6.light, var8.getRenderTickCounter().getTickProgress(false));
          }
       }
    }

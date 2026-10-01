@@ -94,6 +94,26 @@ import ua.daamky.features.render.NameTags;
 import ua.daamky.features.render.NoRender;
 import ua.daamky.features.render.Particles;
 import ua.daamky.features.render.Predictions;
+import ua.daamky.features.extra.FightOdds;
+import ua.daamky.features.extra.SoundRadar;
+import ua.daamky.features.extra.FightRecap;
+import ua.daamky.features.extra.Ghost;
+import ua.daamky.features.extra.EscapeArrow;
+import ua.daamky.features.extra.ThreatGlow;
+import ua.daamky.features.extra.HitInfo;
+import ua.daamky.features.extra.ComboCounter;
+import ua.daamky.features.extra.ArmorAlert;
+import ua.daamky.features.extra.TotemWatch;
+import ua.daamky.features.extra.NearbyList;
+import ua.daamky.features.extra.Compass;
+import ua.daamky.features.extra.SpeedGraph;
+import ua.daamky.features.extra.NetGraph;
+import ua.daamky.features.extra.HitDirection;
+import ua.daamky.features.extra.SmoothHealth;
+import ua.daamky.features.extra.MotionTrails;
+import ua.daamky.features.extra.ItemCounter;
+import ua.daamky.features.extra.SmartCrosshair;
+import ua.daamky.features.extra.FallWarning;
 import ua.daamky.features.render.Radar;
 import ua.daamky.features.render.Waypoints;
 import ua.daamky.features.render.SeeInvisibles;
@@ -172,6 +192,26 @@ public class ModuleManager {
          new Arrows(),
          new Radar(),
          new Waypoints(),
+         new FightOdds(),
+         new SoundRadar(),
+         new FightRecap(),
+         new Ghost(),
+         new EscapeArrow(),
+         new ThreatGlow(),
+         new HitInfo(),
+         new ComboCounter(),
+         new ArmorAlert(),
+         new TotemWatch(),
+         new NearbyList(),
+         new Compass(),
+         new SpeedGraph(),
+         new NetGraph(),
+         new HitDirection(),
+         new SmoothHealth(),
+         new MotionTrails(),
+         new ItemCounter(),
+         new SmartCrosshair(),
+         new FallWarning(),
          new HitWave(),
          new FullBright(),
          new NameTags(),
