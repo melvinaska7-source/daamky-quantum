@@ -391,6 +391,19 @@ public class ClickGuiScreen extends Screen {
                return true;
             }
 
+            if (this.m35(var3, var4, var6, var7 + this.m526(), 110.0F, 22.0F)) {
+               if (this.f50 != ClickGuiScreen$3.f2) {
+                  this.f50 = ClickGuiScreen$3.f2;
+                  this.f51 = 0.0F;
+                  this.f44 = 0.0F;
+                  this.f45 = 0.0F;
+                  this.m1362();
+                  this.m645();
+               }
+
+               return true;
+            }
+
             if (this.m35(var3, var4, var6, var7 + this.m525(), 110.0F, 22.0F)) {
                if (this.f50 != ClickGuiScreen$3.f4) {
                   this.f50 = ClickGuiScreen$3.f4;
@@ -418,6 +431,8 @@ public class ClickGuiScreen extends Screen {
 
          if (this.f50 == ClickGuiScreen$3.f3) {
             return this.m1343(var3, var4, var5);
+         } else if (this.f50 == ClickGuiScreen$3.f2) {
+            return this.m1332(var3, var4, var5);
          } else if (this.f50 == ClickGuiScreen$3.f4) {
             return this.m1337(var3, var4, var5);
          } else if (this.f50 == ClickGuiScreen$3.f5) {
@@ -585,6 +600,11 @@ public class ClickGuiScreen extends Screen {
          float var13 = var11 + 110.0F;
          float var14 = var12 + 34.0F;
          if (this.m35(var9, var10, var13, var14, 320.0F, 256.0F)) {
+            if (this.f50 == ClickGuiScreen$3.f2) {
+               this.f45 = Math.clamp(this.f45 - (float)verticalAmount * 34.0F, 0.0F, this.m529());
+               return true;
+            }
+
             if (this.m634()) {
                float var15 = this.f43 - (float)verticalAmount * 34.0F;
                this.f43 = Math.clamp(var15, 0.0F, this.m1350());
@@ -620,6 +640,7 @@ public class ClickGuiScreen extends Screen {
          this.f68 = this.m1364();
          this.f78 = this.m1363();
          this.f70 = this.m1139(this.f70, this.m646() ? 1.0F : 0.0F, 0.02F, var3);
+         this.f44 = this.m1139(this.f44, Math.clamp(this.f45, 0.0F, this.m529()), 0.016F, var3);
          this.f69 = this.m1139(this.f69, 0.0F, 0.018F, var3);
          this.f51 = Math.min(1.0F, this.f51 + var3 / 340.0F);
 
@@ -870,8 +891,12 @@ public class ClickGuiScreen extends Screen {
       return this.m1327(f1.length) + 12.0F;
    }
 
-   private float m525() {
+   private float m526() {
       return this.m524() + 22.0F + 2.0F;
+   }
+
+   private float m525() {
+      return this.m526() + 22.0F + 2.0F;
    }
 
    private float m2() {
@@ -885,6 +910,8 @@ public class ClickGuiScreen extends Screen {
       float var11;
       if (this.f50 == ClickGuiScreen$3.f3) {
          var11 = this.m524();
+      } else if (this.f50 == ClickGuiScreen$3.f2) {
+         var11 = this.m526();
       } else if (this.f50 == ClickGuiScreen$3.f4) {
          var11 = this.m525();
       } else if (this.f50 == ClickGuiScreen$3.f5) {
@@ -938,6 +965,20 @@ public class ClickGuiScreen extends Screen {
          "Темы",
          this.f50 == ClickGuiScreen$3.f3,
          "cat:themes",
+         var4,
+         var5,
+         var6,
+         var7
+      );
+      this.m1328(
+         var1,
+         var2,
+         var3 + this.m526() * var6,
+         var8,
+         "V",
+         "Косметика",
+         this.f50 == ClickGuiScreen$3.f2,
+         "cat:cosmetics",
          var4,
          var5,
          var6,
@@ -1047,6 +1088,8 @@ public class ClickGuiScreen extends Screen {
          this.m1336(var1, var10, var11, var12, var13, var6, var7, var8, var9);
       } else if (this.f50 == ClickGuiScreen$3.f5) {
          this.m1339(var1, var10, var11, var12, var13, var6, var7, var8, var9);
+      } else if (this.f50 == ClickGuiScreen$3.f2) {
+         this.m1331(var1, var10, var11, var12, var13, var6, var7, var8, var9);
       } else if (this.f50 == ClickGuiScreen$3.f3) {
          this.m1341(var1, var2, var3, var4, var5, var10, var11, var12, var13, var14, var6, var7, var8, var9);
       } else if (this.f48) {
