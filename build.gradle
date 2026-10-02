@@ -21,6 +21,15 @@ dependencies {
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+    
+    modImplementation files("libs/smooth-scrolling.jar")
+    include files("libs/smooth-scrolling.jar")
+    
+    modImplementation files("libs/smoothF5.jar")
+    include files("libs/smoothF5.jar")
+    
+    modImplementation files("libs/architecture.jar")
+    include files("libs/architecture.jar")
 }
 
 processResources {
